@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Conversion Tools</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="flex justify-between h-16 items-center">
+                <h1 class="text-xl font-bold text-gray-900">File Conversion Tools</h1>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Background Removal Tool -->
+            <div class="tool-card">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <h2 class="mt-4 text-lg font-medium">Remove Background</h2>
+                    <p class="mt-2 text-sm text-gray-500">Remove background from any image instantly</p>
+                </div>
+                <form action="/remove-bg" method="post" enctype="multipart/form-data" class="mt-6">
+                    <label class="file-upload-label" id="bgRemovalUpload">
+                        <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                        </svg>
+                        <span class="mt-2 text-sm">Select Image</span>
+                        <input type="file" name="image" accept="image/*" class="hidden" required/>
+                    </label>
+                    <div class="preview-area" id="bgPreview">
+                        <img class="preview-image" alt="Preview">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4 submit-btn">Remove Background</button>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p class="mt-2 text-sm text-gray-500">Processing...</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- PDF to DOCX Tool -->
+            <div class="tool-card">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <h2 class="mt-4 text-lg font-medium">PDF to DOCX</h2>
+                    <p class="mt-2 text-sm text-gray-500">Convert PDF files to editable Word documents</p>
+                </div>
+                <form action="/convert-pdf" method="post" enctype="multipart/form-data" class="mt-6">
+                    <label class="file-upload-label">
+                        <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                        </svg>
+                        <span class="mt-2 text-sm">Select PDF</span>
+                        <input type="file" name="pdf" accept=".pdf" class="hidden" required/>
+                    </label>
+                    <div class="preview-area" id="pdfPreview">
+                        <iframe class="preview-pdf"></iframe>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-4 submit-btn">Convert to DOCX</button>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p class="mt-2 text-sm text-gray-500">Converting...</p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Video Compression Tool -->
+            <div class="tool-card">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    <h2 class="mt-4 text-lg font-medium">Compress Video</h2>
+                    <p class="mt-2 text-sm text-gray-500">Reduce video file size while maintaining quality</p>
+                </div>
+                <form action="/compress-video" method="post" enctype="multipart/form-data" class="mt-6">
+                    <label class="file-upload-label">
+                        <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                        </svg>
+                        <span class="mt-2 text-sm">Select Video</span>
+                        <input type="file" name="video" accept="video/*" class="hidden" required/>
+                    </label>
+                    <div class="preview-area" id="videoPreview">
+                        <video class="video-preview" controls></video>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700">Target Size (MB)</label>
+                        <input type="number" name="target_size" min="1" step="0.1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" required>
+                    </div>
+                    <button type="submit" class="btn btn-purple mt-4 submit-btn">Compress Video</button>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p class="mt-2 text-sm text-gray-500">Compressing...</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Image preview
+        document.querySelector('input[name="image"]').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.querySelector('#bgPreview');
+                    preview.classList.add('active');
+                    preview.querySelector('img').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // PDF preview
+        document.querySelector('input[name="pdf"]').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const preview = document.querySelector('#pdfPreview');
+                preview.classList.add('active');
+                const objectUrl = URL.createObjectURL(file);
+                preview.querySelector('iframe').src = objectUrl;
+            }
+        });
+
+        // Video preview
+        document.querySelector('input[name="video"]').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const preview = document.querySelector('#videoPreview');
+                preview.classList.add('active');
+                const objectUrl = URL.createObjectURL(file);
+                preview.querySelector('video').src = objectUrl;
+            }
+        });
+
+        // Form submission handling
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                this.classList.add('processing');
+            });
+        });
+    </script>
+</body>
+</html>
