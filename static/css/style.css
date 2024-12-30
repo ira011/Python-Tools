@@ -162,3 +162,11 @@ nav {
         transform: rotate(360deg);
     }
 }
+.btn-blue {
+    background-color: var(--blue-primary);
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #2563EB;
+}

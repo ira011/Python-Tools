@@ -4,6 +4,7 @@ from pdf2docx import Converter
 from PIL import Image
 import moviepy as mp
 import os
+from gtts import gTTS
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
@@ -72,6 +73,24 @@ def compress_video():
         return send_file(output_path, as_attachment=True)
     except Exception as e:
         return f"Error: {e}"
+
+# Text-to-Speech tool
+@app.route('/text-to-speech', methods=['POST'])
+def text_to_speech():
+    try:
+        text = request.form['text']
+        if not text.strip():
+            return "Error: No text provided for conversion.", 400
+
+        output_path = os.path.join(RESULT_FOLDER, 'speech.mp3')
+
+        # Convert text to speech
+        tts = gTTS(text)
+        tts.save(output_path)
+
+        return send_file(output_path, as_attachment=True)
+    except Exception as e:
+        return f"Error: {e}", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
