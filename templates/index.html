@@ -126,6 +126,33 @@
                     </div>
                 </form>
             </div>
+            <!-- Video to Audio Converter Tool -->
+            <div class="tool-card">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    <h2 class="mt-4 text-lg font-medium">Video to Audio</h2>
+                    <p class="mt-2 text-sm text-gray-500">Extract audio from video files</p>
+                </div>
+                <form action="/video-to-audio" method="post" enctype="multipart/form-data" class="mt-6">
+                    <label class="file-upload-label">
+                        <svg class="w-8 h-8 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"/>
+                        </svg>
+                        <span class="mt-2 text-sm">Select Video</span>
+                        <input type="file" name="video" accept="video/*" class="hidden" required/>
+                    </label>
+                    <div class="preview-area" id="videoToAudioPreview">
+                        <video class="video-preview" controls></video>
+                    </div>
+                    <button type="submit" class="btn btn-purple mt-4 submit-btn">Convert to Audio</button>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p class="mt-2 text-sm text-gray-500">Converting...</p>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
 

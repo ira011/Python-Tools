@@ -1,0 +1,6 @@
+pip install flask
+pip install rembg
+pip install pdf2docx
+pip install pillow
+pip install moviepy
+pip install gtts

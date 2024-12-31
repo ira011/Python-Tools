@@ -33,21 +33,32 @@ def remove_bg():
 @app.route('/convert-pdf', methods=['POST'])
 def convert_pdf():
     try:
+        # Check if a PDF file is uploaded
         file = request.files['pdf']
         if not file.filename.endswith('.pdf'):
             return "Error: The uploaded file is not a PDF.", 400
 
+        # Define input and output paths
         input_path = os.path.join(UPLOAD_FOLDER, file.filename)
         output_path = os.path.join(RESULT_FOLDER, os.path.splitext(file.filename)[0] + '.docx')
         file.save(input_path)
 
         # Convert PDF to DOCX
-        cv = Converter(input_path)
-        cv.convert(output_path, start=0, end=None)
-        cv.close()
+        try:
+            cv = Converter(input_path)
+            cv.convert(output_path, start=0, end=None)
+            cv.close()
+        except Exception as e:
+            return f"Error during conversion: {e}", 500
+
+        # Check if output file was successfully created
+        if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
+            return "Error: Conversion failed or output file is empty.", 500
+
         return send_file(output_path, as_attachment=True)
     except Exception as e:
         return f"Error: {e}", 500
+
 
 # Video compression tool
 @app.route('/compress-video', methods=['POST'])
@@ -87,6 +98,26 @@ def text_to_speech():
         # Convert text to speech
         tts = gTTS(text)
         tts.save(output_path)
+
+        return send_file(output_path, as_attachment=True)
+    except Exception as e:
+        return f"Error: {e}", 500
+
+# Video to Audio Converter
+@app.route('/video-to-audio', methods=['POST'])
+def video_to_audio():
+    try:
+        file = request.files['video']
+        if not file:
+            return "Error: No video file uploaded.", 400
+
+        input_path = os.path.join(UPLOAD_FOLDER, file.filename)
+        output_path = os.path.join(RESULT_FOLDER, os.path.splitext(file.filename)[0] + '.mp3')
+        file.save(input_path)
+
+        # Extract audio from video
+        video = mp.VideoFileClip(input_path)
+        video.audio.write_audiofile(output_path)
 
         return send_file(output_path, as_attachment=True)
     except Exception as e:
