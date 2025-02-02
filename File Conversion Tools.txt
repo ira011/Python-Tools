@@ -1,0 +1,7 @@
+File Conversion Tools:  
+
+1. Remove Background - Removes the background from images  
+2. PDF to DOCX - Converts PDF files to editable Word documents  
+3. Compress Video - Reduces video file size while maintaining quality  
+4. Text to Speech - Converts text to spoken audio  
+5. Video to Audio - Extracts audio from video files  
